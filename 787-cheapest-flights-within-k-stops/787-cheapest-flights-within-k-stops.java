@@ -28,15 +28,15 @@ class Solution {
         while(!queue.isEmpty()) {
             Element current = queue.poll();
             
+            if ( current.vertex == dst ) {
+                return current.priceTillNow;
+            }
+            
             if (visited.containsKey(current.vertex) && visited.get(current.vertex) > current.stopsLeft) {
                 continue;
             }
             
             visited.put(current.vertex, current.stopsLeft);
-            
-            if ( current.vertex == dst ) {
-                return current.priceTillNow;
-            }
             
             if ( current.stopsLeft > 0 ) {
                 for(Map.Entry<Integer, Integer> entry: graph.getOrDefault(current.vertex, new HashMap<>()).entrySet()) {
